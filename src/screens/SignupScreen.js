@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 
 // Imports..
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { Text, Input, Button } from 'react-native-elements'
 
 // Componets..
@@ -34,9 +34,16 @@ const SignupScreen = ({ navigation }) => {
                 autoCapitalize="none"
                 autoCorrect={false}
             />
+            {state.errorMessage ? <Text style={styles.errorMessage}>{state.errorMessage}</Text> : null}
             <Spacer>
                 <Button title="Sign Up" onPress={() => signup({ email, password })} />
             </Spacer>
+
+            <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
+                <Spacer>
+                    <Text style={styles.link}>Already have account ? Sign in instead</Text>
+                </Spacer>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -47,6 +54,15 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         marginBottom: 100
+    },
+    errorMessage: {
+        fontSize: 16,
+        color: 'red',
+        marginTop: 15,
+        marginLeft: 15
+    },
+    link: {
+        color: 'blue'
     }
 })
 
