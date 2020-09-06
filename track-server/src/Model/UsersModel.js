@@ -40,8 +40,11 @@ userSchema.pre('save', function (next) {
 // when we try to log in with password we campare with database password
 userSchema.methods.comparePassword = function (candidatePassword) {
 
+    // this user = data base user obj
     const user = this;
-    console.log(this, "<=== user")
+
+    // candidatePassword the one who is type his pass 
+    // ex 123456 and we match with user pass in database 
 
     return new Promise((resolve, reject) => {
         bcrypt.compare(candidatePassword, user.password, (err, isMatch) => {

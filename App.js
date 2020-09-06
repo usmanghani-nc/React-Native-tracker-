@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { setNavigator } from './src/navigationRef'
 
 // Screens..
+import ResolveAuthScreen from './src/screens/ResolveAuthScreen'
 import SigninScreen from './src/screens/SigninScreen'
 import SignupScreen from './src/screens/SignupScreen'
 import AccountScreen from './src/screens/AccountScreen'
@@ -18,6 +19,7 @@ import TrackListScreen from './src/screens/TrackListScreen'
 import { Provider as AuthProvider } from './src/context/AuthContext'
 
 const switchNavigator = createSwitchNavigator({
+  ResolveAuth: ResolveAuthScreen,
   loginFlow: createStackNavigator({
     Signup: SignupScreen,
     Signin: SigninScreen,
@@ -30,7 +32,10 @@ const switchNavigator = createSwitchNavigator({
     TrackCreate: TrackCreateScreen,
     Account: AccountScreen,
   })
-})
+},
+  {
+    initialRouteName: 'ResolveAuth'
+  })
 
 
 const App = createAppContainer(switchNavigator)
