@@ -6,10 +6,10 @@ const ResolveAuthScreen = () => {
 
     useEffect(() => {
         tryLocalSignin()
-    }, [])
+    }, []) 
 
 
-    return null
+     return null
 }
 
 export default ResolveAuthScreen
