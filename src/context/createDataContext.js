@@ -8,7 +8,6 @@ export default (reducer, actions, defaultvalue) => {
 
         const boundActions = {};
         for (let key in actions) {
-            console.log(key, "actions")
             boundActions[key] = actions[key](dispatch);
         }
 

@@ -1,48 +1,35 @@
 import '../_mocklocation'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useCallback } from 'react'
 import { StyleSheet } from 'react-native'
 import { Text } from 'react-native-elements'
-import { SafeAreaView } from 'react-navigation'
-import { requestPermissionsAsync, watchPositionAsync, Accuracy } from 'expo-location'
+import { SafeAreaView, withNavigationFocus } from 'react-navigation'
+import { Context as LocationContext } from '../context/LocationContext'
+import userLocation from '../hooks/userLocation'
 import Map from '../Components/Map'
+import TrackFrom from '../Components/TrackFrom'
 
-const TrackCreateScreen = () => {
-    const [err, setErr] = useState(null);
 
-    const startWatching = async () => {
-        try {
-            const granted = await requestPermissionsAsync();
+const TrackCreateScreen = ({ isFocused }) => {
+    const { state, addLocation } = useContext(LocationContext)
+    console.log('out', state.recording)
+    const callback = useCallback((location) => {
+        console.log('in', state.recording)
+        addLocation(location, state.recording)
+    }, [state.recording])
 
-            if (!granted) {
-                throw new Error("Location permission not granted")
-            }
-
-            await watchPositionAsync({
-                accuracy: Accuracy.BestForNavigation,
-                timeInterval: 1000,
-                distanceInterval: 10
-            }, (location) => {
-                console.log(location)
-            })
-        } catch (e) {
-            setErr(e)
-        }
-    }
-
-    useEffect(() => {
-        startWatching()
-    }, [])
+    const [err] = userLocation(isFocused, callback)
 
     return (
         <SafeAreaView forceInset={{ top: 'always' }}>
             <Text h3>TrackCreateScreen</Text>
             <Map />
             {err ? <Text >Pleace enable location services</Text> : null}
+            <TrackFrom />
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({})
 
-export default TrackCreateScreen
+export default withNavigationFocus(TrackCreateScreen)
 
