@@ -1,7 +1,9 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-const TrackDetailScreen = () => {
+const TrackDetailScreen = ({ navigation }) => {
+    const _id = navigation.params('_id')
+
     return (
         <View>
             <Text>TrackDetailScreen</Text>
@@ -9,4 +11,5 @@ const TrackDetailScreen = () => {
     )
 }
 const styles = StyleSheet.create({})
+
 export default TrackDetailScreen
