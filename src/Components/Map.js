@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { View, StyleSheet, ActivityIndicator } from 'react-native'
 import { Text } from 'react-native-elements'
-import MapView, { , Circle } from 'react-native-maps'
+import MapView, { Polyline, Circle } from 'react-native-maps'
 import { Context as LocationContext } from '../context/LocationContext'
 
 const Map = () => {
