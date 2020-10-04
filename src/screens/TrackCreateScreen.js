@@ -1,12 +1,12 @@
 import '../_mocklocation'
 import React, { useContext, useCallback } from 'react'
 import { Text } from 'react-native-elements'
-import { SafeAreaView, withNavigationFocus } from 'react-navigation'
+import { SafeAreaView } from 'react-navigation'
 import { Context as LocationContext } from '../context/LocationContext'
 import userLocation from '../hooks/userLocation'
 import Map from '../Components/Map'
 import TrackFrom from '../Components/TrackFrom'
-
+import FontAwsome from '@expo/vector-icons'
 
 const TrackCreateScreen = ({ isFocused }) => {
     const { state: { recording }, addLocation } = useContext(LocationContext)
@@ -25,6 +25,11 @@ const TrackCreateScreen = ({ isFocused }) => {
             <TrackFrom />
         </SafeAreaView>
     )
+}
+
+TrackCreateScreen.navgationOptions = {
+    title: 'Add Track',
+    tabBarIcon: <FontAwsome name="plus" size={20} />
 }
 
 export default withNavigationFocus(TrackCreateScreen)

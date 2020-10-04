@@ -5,6 +5,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { setNavigator } from './src/navigationRef'
+import FontAwsome from '@expo/vector-icons'
 
 // Screens..
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen'
@@ -20,6 +21,15 @@ import { Provider as LocationContext } from './src/context/LocationContext'
 import { Provider as AuthProvider } from './src/context/AuthContext'
 import { Provider as TrackContext } from './src/context/TrackContext'
 
+const trackListFlow = createStackNavigator({
+  trackList: TrackListScreen,
+  trackDetail: TrackDetailScreen
+})
+
+trackListFlow.navgationOptions = {
+  title: 'Account',
+  tabBarIcon: <FontAwsome name="th-list" size={20} />
+}
 
 const switchNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
@@ -28,10 +38,7 @@ const switchNavigator = createSwitchNavigator({
     Signin: SigninScreen,
   }),
   mainFlow: createBottomTabNavigator({
-    trackListFlow: createStackNavigator({
-      trackList: TrackListScreen,
-      trackDetail: TrackDetailScreen
-    }),
+    trackListFlow,
     TrackCreate: TrackCreateScreen,
     Account: AccountScreen,
   })
